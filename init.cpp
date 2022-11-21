@@ -1,7 +1,6 @@
 #include <stm32f10x.h>
 #include <math.h>
 
-
 #include "init.h"
 
 void clock_init()
@@ -16,34 +15,32 @@ void clock_init()
 	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
 }
 
-
 void adc_init()
 {
 	ADC1->CR2 |= ADC_CR2_ADON; 
 	ADC1->CR2 |= ADC_CR2_CAL;
 	while ((ADC1->CR2 & ADC_CR2_CAL) > 0) asm ("nop");
-	ADC1-> JSQR &= ~ADC_JSQR_JL;
+	ADC1->JSQR &= ~ADC_JSQR_JL;
 	ADC1->CR1 |= ADC_CR1_JEOCIE;
-	ADC1-> CR2 |= ADC_CR2_JEXTTRIG;	
-	ADC1-> CR2 |= ADC_CR2_JEXTSEL; 
-	ADC1-> SMPR2 |= ADC_SMPR2_SMP0;
-	ADC1-> JSQR |= 0;
+	ADC1->CR2 |= ADC_CR2_JEXTTRIG;	
+	ADC1->CR2 |= ADC_CR2_JEXTSEL; 
+	ADC1->SMPR2 |= ADC_SMPR2_SMP0;
+	ADC1->JSQR |= 0;
 	ADC1->CR2 |= ADC_CR2_ADON;
 }
 
 
 void interrupt_init()
 {
-//	AFIO->EXTICR[1] |= AFIO_EXTICR2_EXTI6_PB;
+	AFIO->EXTICR[1] |= AFIO_EXTICR2_EXTI6_PB;
   
   NVIC_EnableIRQ (TIM1_UP_IRQn);
-//	NVIC_EnableIRQ (TIM3_IRQn);
-//	NVIC_EnableIRQ (TIM4_IRQn);
-//	NVIC_EnableIRQ (ADC1_2_IRQn);
-//	NVIC_EnableIRQ (EXTI9_5_IRQn);
-//	EXTI->IMR |= EXTI_IMR_MR6;
-//	EXTI->FTSR |= EXTI_FTSR_TR6;	
-//	EXTI->RTSR |= EXTI_RTSR_TR6;	
+	NVIC_EnableIRQ (TIM3_IRQn);
+	NVIC_EnableIRQ (TIM4_IRQn);
+	NVIC_EnableIRQ (ADC1_2_IRQn);
+	NVIC_EnableIRQ (EXTI9_5_IRQn);
+	EXTI->IMR |= EXTI_IMR_MR6;
+	EXTI->RTSR |= EXTI_RTSR_TR6;	
 }
 
 

@@ -2,7 +2,7 @@
 #define __MATH_H__
 
 template <typename T>
-inline T absolute(T arg)  
+T absolute(T arg)  
 {
 	return arg >= 0 ? arg : -arg;
 }

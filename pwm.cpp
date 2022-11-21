@@ -67,20 +67,20 @@ void TIM1_UP_IRQHandler (void)
 
 void tim_pwm_asign (int val1, int val2, int val3)
 {		
-    TIM1->CCR1 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val1 * current_frequency /50 /100);
+//    TIM1->CCR1 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val1 * current_frequency /50 /100);
+//		TIM1->CCR2 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val2 * current_frequency /50 /100);
+//		TIM1->CCR3 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val3 * current_frequency /50 /100);
+	if (current_frequency <=50)	
+	{
+		TIM1->CCR1 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val1 * current_frequency /50 /100);
 		TIM1->CCR2 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val2 * current_frequency /50 /100);
 		TIM1->CCR3 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val3 * current_frequency /50 /100);
-//	if (current_frequency <=50)	
-//	{
-//		TIM1->CCR1 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val1 * current_frequency /50 /100);
-//		TIM1->CCR2 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val2 * current_frequency /50 /100);
-//		TIM1->CCR3 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val3 * current_frequency /50 /100);
-//	}
-//	else
-//	{
-//		TIM1->CCR1 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val1 * current_frequency /50 /100);
-//		TIM1->CCR2 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val2 * current_frequency /50 /100);
-//		TIM1->CCR3 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val3 * current_frequency /50 /100);
-//	}
+	}
+	else
+	{
+		TIM1->CCR1 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val1 * current_frequency /50 /100);
+		TIM1->CCR2 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val2 * current_frequency /50 /100);
+		TIM1->CCR3 = TIM1->ARR/2 - (TIM1->ARR/2/1000 * val3 * current_frequency /50 /100);
+	}
 }
 
